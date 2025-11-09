@@ -44,7 +44,7 @@ def display_banner():
 ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝
 {Colors.CYAN}
 WOLF PASS GENERATOR - Advanced Password Generation Tool
-{Colors.YELLOW}Version 3.1 | Wolf Security Team | Victim: 30M | RockYou: 14.34M{Colors.END}
+{Colors.YELLOW}Version 3.2 | Wolf Security Team | Victim: 30M | Custom Wordlists{Colors.END}
 """
     print(banner)
 
@@ -79,7 +79,7 @@ class PasswordGenerator:
         
         self.MAX_RANDOM_PASSWORDS = 10000000  # 10 million limit for random generation
         self.MAX_VICTIM_PASSWORDS = 30000000  # 30 million limit for victim-based generation
-        self.MAX_ROCKYOU_PASSWORDS = 14340000  # 14.34 million limit for rockyou
+        self.MAX_WORDLIST_PASSWORDS = 50000000  # 50 million limit for custom wordlists
 
     def generate_random_password(self, length=12, format_type='all', count=1):
         """Generate random passwords based on format"""
@@ -444,22 +444,27 @@ class PasswordGenerator:
 
     def load_rockyou_passwords(self, max_passwords=1000):
         """Load passwords from rockyou.txt file - automatically uses rockyou.txt in same folder"""
+        return self.load_custom_wordlist("rockyou.txt", max_passwords)
+
+    def load_custom_wordlist(self, filepath, max_passwords=1000):
+        """Load passwords from any custom text file"""
         # Check password count limit
-        if max_passwords > self.MAX_ROCKYOU_PASSWORDS:
-            print(f"{Colors.RED}Error: Cannot load more than {self.MAX_ROCKYOU_PASSWORDS:,} passwords{Colors.END}")
+        if max_passwords > self.MAX_WORDLIST_PASSWORDS:
+            print(f"{Colors.RED}Error: Cannot load more than {self.MAX_WORDLIST_PASSWORDS:,} passwords{Colors.END}")
             return []
             
         passwords = []
-        filename = "rockyou.txt"  # Fixed filename - always use rockyou.txt in same folder
         
-        if not os.path.exists(filename):
-            print(f"{Colors.RED}Error: {filename} not found in current directory{Colors.END}")
-            print(f"{Colors.YELLOW}Please ensure rockyou.txt is in the same folder as this script{Colors.END}")
+        if not os.path.exists(filepath):
+            print(f"{Colors.RED}Error: {filepath} not found{Colors.END}")
             return []
         
         try:
-            print(f"{Colors.YELLOW}Loading passwords from {filename}...{Colors.END}")
-            with open(filename, 'r', encoding='utf-8', errors='ignore') as file:
+            file_size = os.path.getsize(filepath)
+            print(f"{Colors.YELLOW}Loading passwords from {filepath}...{Colors.END}")
+            print(f"{Colors.CYAN}File size: {file_size:,} bytes{Colors.END}")
+            
+            with open(filepath, 'r', encoding='utf-8', errors='ignore') as file:
                 for i, line in enumerate(file):
                     if i >= max_passwords:
                         break
@@ -469,8 +474,9 @@ class PasswordGenerator:
                     # Show progress for large loads
                     if max_passwords > 1000 and i % 10000 == 0:
                         print(f"{Colors.CYAN}Progress: {i:,}/{max_passwords:,} passwords loaded...{Colors.END}")
+                        
         except Exception as e:
-            print(f"{Colors.RED}Error reading {filename}: {e}{Colors.END}")
+            print(f"{Colors.RED}Error reading {filepath}: {e}{Colors.END}")
             return []
         
         return passwords
@@ -537,7 +543,8 @@ def display_help():
     {Colors.GREEN}-l, --length{Colors.END}         Password length (default: 12)
     {Colors.GREEN}-c, --count{Colors.END}          Number of passwords to generate (default: 10, max: 10,000,000)
     {Colors.GREEN}-v, --victim{Colors.END}         Use victim information (max: 30,000,000)
-    {Colors.GREEN}-r, --rockyou{Colors.END}        Use rockyou.txt passwords (max: 14,340,000)
+    {Colors.GREEN}-r, --rockyou{Colors.END}        Use rockyou.txt passwords
+    {Colors.GREEN}-w, --wordlist{Colors.END}       Use custom wordlist file
     {Colors.GREEN}-a, --algorithm{Colors.END}      Algorithm for victim-based generation
     {Colors.GREEN}-h, --help{Colors.END}           Show this help message
 
@@ -567,12 +574,13 @@ def display_help():
 {Colors.YELLOW}MAXIMUM LIMITS:{Colors.END}
     {Colors.GREEN}Random Generation:{Colors.END} 10,000,000 passwords
     {Colors.GREEN}Victim-Based:{Colors.END} 30,000,000 passwords  
-    {Colors.GREEN}RockYou Load:{Colors.END} 14,340,000 passwords
+    {Colors.GREEN}Custom Wordlists:{Colors.END} 50,000,000 passwords
 
 {Colors.YELLOW}EXAMPLES:{Colors.END}
     python wolf_pass_generator.py -g -f bigalphanumb -l 16 -c 5
     python wolf_pass_generator.py -v -a massive,hybrid,combinator -c 50000 -n victim_passwords.txt
     python wolf_pass_generator.py -r -c 1000000 -n common_passwords.txt
+    python wolf_pass_generator.py -w /path/to/wordlist.txt -c 50000 -n my_passwords.txt
     python wolf_pass_generator.py -g -c 1000000 -n million_passwords.txt
     """
     print(help_text)
@@ -592,11 +600,12 @@ def interactive_mode():
         print(f"{Colors.GREEN}1.{Colors.END} Generate random password list")
         print(f"{Colors.GREEN}2.{Colors.END} Generate passwords with victim info")
         print(f"{Colors.GREEN}3.{Colors.END} Use rockyou.txt passwords")
-        print(f"{Colors.GREEN}4.{Colors.END} Show algorithms and examples")
-        print(f"{Colors.GREEN}5.{Colors.END} Help")
-        print(f"{Colors.GREEN}6.{Colors.END} Exit")
+        print(f"{Colors.GREEN}4.{Colors.END} Use custom wordlist file")
+        print(f"{Colors.GREEN}5.{Colors.END} Show algorithms and examples")
+        print(f"{Colors.GREEN}6.{Colors.END} Help")
+        print(f"{Colors.GREEN}7.{Colors.END} Exit")
         
-        choice = input(f"\n{Colors.YELLOW}Select option (1-6): {Colors.END}").strip()
+        choice = input(f"\n{Colors.YELLOW}Select option (1-7): {Colors.END}").strip()
         
         if choice == '1':
             clear_screen()
@@ -676,7 +685,7 @@ def interactive_mode():
             print(f"{Colors.YELLOW}Note: Using rockyou.txt from current directory{Colors.END}")
             
             try:
-                max_passwords = int(input(f"{Colors.YELLOW}Maximum passwords to load (max 14,340,000) [1000]: {Colors.END}").strip() or "1000")
+                max_passwords = int(input(f"{Colors.YELLOW}Maximum passwords to load (max 50,000,000) [1000]: {Colors.END}").strip() or "1000")
             except ValueError:
                 max_passwords = 1000
             
@@ -701,21 +710,56 @@ def interactive_mode():
         elif choice == '4':
             clear_screen()
             display_banner()
-            show_algorithms()
+            print(f"\n{Colors.CYAN}=== Custom Wordlist Loading ==={Colors.END}")
+            
+            filepath = input(f"{Colors.YELLOW}Enter path to wordlist file: {Colors.END}").strip()
+            
+            if not filepath:
+                print(f"{Colors.RED}No file path provided.{Colors.END}")
+                wait_and_continue()
+                continue
+            
+            try:
+                max_passwords = int(input(f"{Colors.YELLOW}Maximum passwords to load (max 50,000,000) [1000]: {Colors.END}").strip() or "1000")
+            except ValueError:
+                max_passwords = 1000
+            
+            filename = input(f"{Colors.YELLOW}Save to file (leave empty to display only): {Colors.END}").strip()
+            
+            passwords = generator.load_custom_wordlist(filepath, max_passwords)
+            
+            if passwords:
+                print(f"\n{Colors.GREEN}✓ Successfully loaded {len(passwords):,} passwords from {filepath}:{Colors.END}")
+                for i, pwd in enumerate(passwords[:20], 1):  # Show first 20
+                    print(f"{i:2d}. {pwd}")
+                if len(passwords) > 20:
+                    print(f"{Colors.YELLOW}... and {len(passwords) - 20:,} more passwords{Colors.END}")
+                
+                if filename:
+                    save_passwords(passwords, filename)
+            else:
+                print(f"{Colors.RED}✗ No passwords loaded from {filepath}.{Colors.END}")
+            
             wait_and_continue()
         
         elif choice == '5':
             clear_screen()
             display_banner()
-            display_help()
+            show_algorithms()
             wait_and_continue()
         
         elif choice == '6':
+            clear_screen()
+            display_banner()
+            display_help()
+            wait_and_continue()
+        
+        elif choice == '7':
             print(f"{Colors.GREEN}Thank you for using WOLF PASS GENERATOR!{Colors.END}")
             break
         
         else:
-            print(f"{Colors.RED}Invalid option! Please select 1-6.{Colors.END}")
+            print(f"{Colors.RED}Invalid option! Please select 1-7.{Colors.END}")
             wait_and_continue()
 
 def main():
@@ -733,6 +777,7 @@ def main():
     parser.add_argument('-c', '--count', type=int, default=10, help='Number of passwords')
     parser.add_argument('-v', '--victim', action='store_true', help='Use victim information')
     parser.add_argument('-r', '--rockyou', action='store_true', help='Use rockyou.txt')
+    parser.add_argument('-w', '--wordlist', type=str, help='Use custom wordlist file')
     parser.add_argument('-a', '--algorithm', type=str, help='Algorithms for victim-based generation')
     parser.add_argument('-h', '--help', action='store_true', help='Show help')
     
@@ -783,6 +828,19 @@ def main():
         
         if passwords:
             print(f"{Colors.GREEN}Loaded {len(passwords):,} passwords:{Colors.END}")
+            for i, pwd in enumerate(passwords[:20], 1):
+                print(f"{i:2d}. {pwd}")
+            if len(passwords) > 20:
+                print(f"{Colors.YELLOW}... and {len(passwords) - 20:,} more{Colors.END}")
+            
+            if args.filename:
+                save_passwords(passwords, args.filename)
+    
+    elif args.wordlist:
+        passwords = generator.load_custom_wordlist(args.wordlist, args.count)
+        
+        if passwords:
+            print(f"{Colors.GREEN}Loaded {len(passwords):,} passwords from {args.wordlist}:{Colors.END}")
             for i, pwd in enumerate(passwords[:20], 1):
                 print(f"{i:2d}. {pwd}")
             if len(passwords) > 20:
