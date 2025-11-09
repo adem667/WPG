@@ -1,30 +1,30 @@
-# ðŸº Wolf Pass Generator v3.1  
+#  Wolf Pass Generator v3.1  
 ### Advanced Multi-Mode Password Generation Tool  
 **Developed by Wolf Security Team**
 
 ---
 
-## ðŸ§© Overview
+##  Overview
 
 **Wolf Pass Generator** is a powerful and flexible Python tool that generates password lists for penetration testing, cybersecurity research, and advanced security analysis.  
 It offers multiple generation algorithms â€” including random, victim-based, hybrid, and combinator patterns â€” capable of producing up to **30 million passwords**.
 
 ---
 
-## âš¡ Features
+##  Features
 
-- ðŸ”¢ **Random password generation** using multiple formats (alpha, numeric, special, etc.)
-- ðŸ‘¤ **Victim-based generation** using user-defined info (name, year, keywords, etc.)
-- ðŸ’¡ **6 smart algorithms** (`basic`, `leet`, `advanced`, `combinator`, `massive`, `hybrid`)
-- ðŸ’¾ **Supports loading `rockyou.txt`** for common password analysis
-- ðŸ§  **Custom format parsing** (`"word"numbspecial`)
-- ðŸ§® **High performance** â€” handles millions of passwords efficiently
-- ðŸŒˆ **Beautiful terminal colors & banners**
-- ðŸ§° **Interactive mode + Command-line mode**
+-  **Random password generation** using multiple formats (alpha, numeric, special, etc.)
+-  **Victim-based generation** using user-defined info (name, year, keywords, etc.)
+-  **6 smart algorithms** (`basic`, `leet`, `advanced`, `combinator`, `massive`, `hybrid`)
+-  **Supports loading `rockyou.txt`** for common password analysis
+-  **Custom format parsing** (`"word"numbspecial`)
+-  **High performance** â€” handles millions of passwords efficiently
+-  **Beautiful terminal colors & banners**
+-  **Interactive mode + Command-line mode**
 
 ---
 
-## ðŸ› ï¸ Installation
+##  Installation
 
 ### Requirements
 Make sure you have **Python 3.7+** installed.
@@ -35,8 +35,8 @@ python --version
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/Wolf-Pass-Generator.git
-cd Wolf-Pass-Generator
+git clone https://github.com/adem667/WPG.git
+cd WPG-main
 ```
 
 ### Run the Tool
@@ -46,33 +46,33 @@ python wolf_pass_generator.py
 
 ---
 
-## ðŸ§  Usage
+##  Usage
 
 ### Command-Line Examples
 
-#### ðŸ”¹ Random Password Generation
+####  Random Password Generation
 ```bash
 python wolf_pass_generator.py -g -f all -l 12 -c 100
 ```
 
-#### ðŸ”¹ Victim-Based Generation
+####  Victim-Based Generation
 ```bash
 python wolf_pass_generator.py -v -a massive,hybrid -c 50000 -n victim_list.txt
 ```
 
-#### ðŸ”¹ Load RockYou List
+####  Load RockYou List
 ```bash
 python wolf_pass_generator.py -r -c 100000 -n rockyou_filtered.txt
 ```
 
-#### ðŸ”¹ Interactive Mode
+####  Interactive Mode
 ```bash
 python wolf_pass_generator.py
 ```
 
 ---
 
-## ðŸ§© Format Types
+##  Format Types
 
 | Type | Description |
 |------|--------------|
@@ -94,7 +94,7 @@ alpha"123"special
 
 ---
 
-## ðŸ§  Algorithms Overview
+##  Algorithms Overview
 
 | Algorithm | Description |
 |------------|-------------|
@@ -107,7 +107,7 @@ alpha"123"special
 
 ---
 
-## ðŸ’¾ Output
+##  Output
 
 All generated passwords can be automatically saved to a file:
 ```bash
@@ -124,7 +124,7 @@ ALPHA!2024
 
 ---
 
-## âš ï¸ Legal Disclaimer
+##  Legal Disclaimer
 
 This project is created **strictly for educational and cybersecurity research purposes**.  
 Do **not** use this tool for unauthorized attacks or any illegal activities.  
@@ -132,7 +132,7 @@ The author(s) are **not responsible** for any misuse or damage caused by this so
 
 ---
 
-## ðŸº Credits
+##  Credits
 
 - **Developer:** Wolf Security Team  
 - **Version:** 3.1  
@@ -141,19 +141,19 @@ The author(s) are **not responsible** for any misuse or damage caused by this so
 
 ---
 
-## ðŸ“œ License
+##  License
 
 This project is released under the **MIT License** â€” free to modify and distribute with attribution.
 
 ---
 
-> ðŸ§  *"Strong passwords protect weak systems. Weak passwords destroy strong systems."*  
+>  *"Strong passwords protect weak systems. Weak passwords destroy strong systems."*  
 > â€” Wolf Security Team
 
 
 ---
 
-## ðŸ› ï¸ Installation
+##  Installation
 
 ### Requirements
 Make sure you have **Python 3.7+** installed.
@@ -164,8 +164,8 @@ python --version
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/Wolf-Pass-Generator.git
-cd Wolf-Pass-Generator
+git clone https://github.com/adem667/WPG.git
+cd WPG-main
 ```
 
 ### Run the Tool
@@ -184,15 +184,12 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y git python3 python3-pip
 
 # Clone the repository and navigate into it
-git clone https://github.com/YOUR_USERNAME/Wolf-Pass-Generator.git
-cd Wolf-Pass-Generator
+git clone https://github.com/adem667/WPG.git
+cd WPG-main
 
-# (Optional) If your script filename is different, replace wolf_pass_generator.py below with your filename (e.g., generator.py)
-# Install Python dependencies if you have a requirements.txt
-if [ -f requirements.txt ]; then
-    python3 -m pip install --upgrade pip
-    python3 -m pip install -r requirements.txt
-fi
+# Install Python dependencies (if present)
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
 
 # Run the generator (use python3 explicitly)
 python3 wolf_pass_generator.py
@@ -207,14 +204,12 @@ pkg update && pkg upgrade -y
 pkg install -y git python
 
 # Clone the repository and navigate into it
-git clone https://github.com/YOUR_USERNAME/Wolf-Pass-Generator.git
-cd Wolf-Pass-Generator
+git clone https://github.com/adem667/WPG.git
+cd WPG-main
 
 # Install Python dependencies (if present)
-if [ -f requirements.txt ]; then
-    pip install --upgrade pip
-    pip install -r requirements.txt
-fi
+pip install --upgrade pip
+pip install -r requirements.txt
 
 # Run the generator
 # If the script name is wolf_pass_generator.py:
