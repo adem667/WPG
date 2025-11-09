@@ -175,7 +175,7 @@ cd WPG-main
 
 ### Run the Tool
 ```bash
-python wolf_pass_generator.py
+python generator.py
 ```
 
 ---
