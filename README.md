@@ -1,4 +1,9 @@
 #  Wolf Pass Generator v3.1  
+![image alt](https://github.com/adem667/WPG/blob/main/Screenshot_20251109_144802_com_termux_TermuxActivity_edit_44332026366719.jpg)
+
+
+
+
 ### Advanced Multi-Mode Password Generation Tool  
 **Developed by Wolf Security Team**
 
@@ -8,7 +13,7 @@
 
 **Wolf Pass Generator** is a powerful and flexible Python tool that generates password lists for penetration testing, cybersecurity research, and advanced security analysis.  
 It offers multiple generation algorithms â€” including random, victim-based, hybrid, and combinator patterns â€” capable of producing up to **30 million passwords**.
-![image alt](https://github.com/adem667/WPG/blob/main/Screenshot_20251109_144802_com_termux_TermuxActivity_edit_44332026366719.jpg)
+
 ---
 
 ##  Features
