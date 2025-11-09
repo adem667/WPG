@@ -1,96 +1,149 @@
-#  Wolf Pass Generator v3.1  
-![image alt](https://github.com/adem667/WPG/blob/main/Screenshot_20251109_144802_com_termux_TermuxActivity_edit_44332026366719.jpg)
+# Wolf Pass Generator v3.2
 
+![Screenshot](https://github.com/adem667/WPG/blob/main/Screenshot_20251109_144802_com_termux_TermuxActivity_edit_44332026366719.jpg)
 
-
-
-### Advanced Multi-Mode Password Generation Tool  
-**Developed by Wolf Security Team**
+## Advanced Multi-Mode Password Generation Tool
+Developed by Wolf Security Team
 
 ---
 
-##  Overview
+## Overview
 
-**Wolf Pass Generator** is a powerful and flexible Python tool that generates password lists for penetration testing, cybersecurity research, and advanced security analysis.  
-It offers multiple generation algorithms â€” including random, victim-based, hybrid, and combinator patterns â€” capable of producing up to **30 million passwords**.
-
----
-
-##  Features
-
--  **Random password generation** using multiple formats (alpha, numeric, special, etc.)
--  **Victim-based generation** using user-defined info (name, year, keywords, etc.)
--  **6 smart algorithms** (`basic`, `leet`, `advanced`, `combinator`, `massive`, `hybrid`)
--  **Supports loading `rockyou.txt`** for common password analysis
--  **Custom format parsing** (`"word"numbspecial`)
--  **High performance** â€” handles millions of passwords efficiently
--  **Beautiful terminal colors & banners**
--  **Interactive mode + Command-line mode**
+Wolf Pass Generator is a Python tool that generates password lists for penetration testing, cybersecurity research, and security analysis.
+It offers multiple generation algorithms including random, victim-based, hybrid, and combinator patterns and supports custom wordlists.
 
 ---
 
-##  Installation
+## Features
 
-### Requirements
-Make sure you have **Python 3.7+** installed.
+- Random password generation using multiple formats (alpha, numeric, special, etc.)
+- Victim-based generation using user-defined info (name, year, keywords, etc.)
+- Six algorithms: `basic`, `leet`, `advanced`, `combinator`, `massive`, `hybrid`
+- Supports loading `rockyou.txt` and custom wordlists
+- Custom format parsing (e.g., "word"numbspecial)
+- Interactive mode and command-line mode
+- Colorful terminal output and banner
+
+---
+
+## Installation
+
+Requirements
+Make sure you have Python 3.7+ installed:
 
 ```bash
 python --version
 ```
 
-### Clone the Repository
+Clone the repository:
+
 ```bash
 git clone https://github.com/adem667/WPG.git
 cd WPG-main
 ```
 
-### Run the Tool
-```bash
-python wolf_pass_generator.py
-```
+Run the tool:
 
----
-
-##  Usage
-
-### Command-Line Examples
-
-####  Random Password Generation
-```bash
-python3 generator.py -g -f all -l 12 -c 100
-```
-
-####  Victim-Based Generation
-```bash
-python3 generator.py -v -a massive,hybrid -c 50000 -n victim_list.txt
-```
-
-####  Load RockYou List
-```bash
-python generator.py -r -c 100000 -n rockyou_filtered.txt
-```
-
-####  Interactive Mode
 ```bash
 python3 generator.py
 ```
 
 ---
 
-##  Format Types
+## Linux installation (Debian/Ubuntu example)
 
-| Type | Description |
-|------|--------------|
-| `bigalpha` | Uppercase letters (Aâ€“Z) |
-| `smallalpha` | Lowercase letters (aâ€“z) |
-| `alpha` | Both upper and lower case |
-| `numeric` | Numbers (0â€“9) |
-| `special` | Special characters |
-| `alphanumeric` | Letters + numbers |
-| `all` | All character types combined |
-| `custom` | User-defined patterns |
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git python3 python3-pip
+git clone https://github.com/adem667/WPG.git
+cd WPG-main
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+python3 generator.py
+```
 
-**Custom format examples:**
+---
+
+## Termux installation (Android)
+
+```bash
+pkg update && pkg upgrade -y
+pkg install -y git python
+git clone https://github.com/adem667/WPG.git
+cd WPG-main
+pip install --upgrade pip
+pip install -r requirements.txt
+python3 generator.py
+```
+
+Note: Termux uses `pkg`. If dependencies require compilation, install build tools (for example `pkg install clang make`).
+
+---
+
+## Usage
+
+Command-line examples:
+
+Random password generation:
+
+```bash
+python3 generator.py -g -f all -l 12 -c 100
+```
+
+Victim-based generation:
+
+```bash
+python3 generator.py -v -a massive,hybrid -c 50000 -n victim_list.txt
+```
+
+Load RockYou list:
+
+```bash
+python3 generator.py -r -c 100000 -n rockyou_filtered.txt
+```
+
+Use custom wordlist:
+
+```bash
+python3 generator.py -w /path/to/wordlist.txt -c 50000 -n my_passwords.txt
+```
+
+Interactive mode:
+
+```bash
+python3 generator.py
+```
+
+---
+
+## Command-line options
+
+- `-g`, `--generate`        Generate random password list
+- `-n`, `--filename`        Output filename
+- `-f`, `--format`          Password format type (bigalpha, smallalpha, alpha, numeric, special, alphanumeric, all, custom)
+- `-l`, `--length`          Password length (default: 12)
+- `-c`, `--count`           Number of passwords (default: 10)
+- `-v`, `--victim`          Use victim information (interactive prompt)
+- `-r`, `--rockyou`         Load passwords from rockyou.txt in current directory
+- `-w`, `--wordlist`        Path to a custom wordlist file
+- `-a`, `--algorithm`       Algorithms for victim-based generation (comma separated)
+- `-h`, `--help`            Show help
+
+---
+
+## Format types
+
+- `bigalpha`    Uppercase letters (A-Z)
+- `smallalpha`  Lowercase letters (a-z)
+- `alpha`       Upper and lower case
+- `numeric`     Numbers (0-9)
+- `special`     Special characters
+- `alphanumeric` Letters + numbers
+- `all`         All character types combined
+- `custom`      User-defined patterns (see examples below)
+
+Custom format examples:
+
 ```bash
 "word"numb
 bigalphasmallalphanumb
@@ -99,27 +152,27 @@ alpha"123"special
 
 ---
 
-##  Algorithms Overview
+## Algorithms overview
 
-| Algorithm | Description |
-|------------|-------------|
-| `basic` | Basic combinations with special chars and years |
-| `leet` | Converts letters into leet-style numbers |
-| `advanced` | Adds suffixes and complex combinations |
-| `combinator` | Merges multiple victim keywords |
-| `massive` | Generates extensive variations |
-| `hybrid` | Combines multiple transformation techniques |
+- `basic`      Basic combinations with special characters and years
+- `leet`       Leet substitutions (a->4, e->3, ...)
+- `advanced`   Adds suffixes and complex combinations
+- `combinator` Merge multiple victim keywords
+- `massive`    Extensive variations and numeric sequences
+- `hybrid`     Combination of transformations and leet
 
 ---
 
-##  Output
+## Output
 
-All generated passwords can be automatically saved to a file:
+Save generated passwords to a file:
+
 ```bash
-python wolf_pass_generator.py -g -f alpha -l 10 -c 50 -n output.txt
+python3 generator.py -g -f alpha -l 10 -c 50 -n output.txt
 ```
 
-Example output file (`output.txt`):
+Example content of `output.txt`:
+
 ```
 Alpha2025!
 aLph@123
@@ -129,101 +182,38 @@ ALPHA!2024
 
 ---
 
-##  Legal Disclaimer
+## Where files (.txt) are located
 
-This project is created **strictly for educational and cybersecurity research purposes**.  
-Do **not** use this tool for unauthorized attacks or any illegal activities.  
-The author(s) are **not responsible** for any misuse or damage caused by this software.
-
----
-
-##  Credits
-
-- **Developer:** Wolf Security Team  
-- **Version:** 3.1  
-- **Languages:** Python 3  
-- **Banner:** Custom ANSI Art  
-
----
-
-##  License
-
-This project is released under the **MIT License** â€” free to modify and distribute with attribution.
-
----
-
->  *"Strong passwords protect weak systems. Weak passwords destroy strong systems."*  
-> â€” Wolf Security Team
-
-
----
-
-##  Installation
-
-### Requirements
-Make sure you have **Python 3.7+** installed.
+- If you run the script from the repository folder (`cd WPG-main`) any created files (for example `output.txt`, `wrong.txt`) will be saved in that same folder.
+- If you run the script from another path, look for files in the current working directory where you ran `python3 generator.py`.
+- To find `.txt` files recursively:
 
 ```bash
-python --version
+find . -type f -name "*.txt"
 ```
 
-### Clone the Repository
-```bash
-git clone https://github.com/adem667/WPG.git
-cd WPG-main
-```
+- On Android Termux, to access files from file manager or ZArchiver you can copy to `/sdcard`:
 
-### Run the Tool
 ```bash
-python generator.py
+cp output.txt /sdcard/
 ```
 
 ---
 
-### Install on **Linux** (Debian/Ubuntu example)
-```bash
-# Update package lists and upgrade packages
-sudo apt update && sudo apt upgrade -y
+## Legal disclaimer
 
-# Install git and Python 3 + pip
-sudo apt install -y git python3 python3-pip
-
-# Clone the repository and navigate into it
-git clone https://github.com/adem667/WPG.git
-cd WPG
-
-# Install Python dependencies (if present)
-python3 -m pip install --upgrade pip
-python3 -m pip install -r requirements.txt
-
-# Run the generator (use python3 explicitly)
-python3 generator.py
-```
-
-### Install on **Termux** (Android)
-```bash
-# Update and upgrade Termux packages
-pkg update && pkg upgrade -y
-
-# Install git and python (provides Python 3)
-pkg install python3
-
-# Clone the repository and navigate into it
-git clone https://github.com/adem667/WPG.git
-cd WPG
-
-# Install Python dependencies (if present)
-pip install --upgrade pip
-pip install -r requirements.txt
-
-# Run the generator
-# If the script name is generator.py:
-python3 generator.py
-
-# Or if you've renamed it to generator.py:
-# python generator.py
-```
-
-> Note: Termux runs on Android and uses `pkg` to manage packages. Some packages or dependencies (native extensions) may require additional build tools (`clang`, `make`, etc.). If you run into missing build tools, install them via `pkg install clang make`.
+This project is for educational and authorized security testing only. Do not use it for unauthorized attacks or illegal activities. The author is not responsible for misuse.
 
 ---
+
+## Credits
+
+Developer: Wolf Security Team  
+Version: 3.2  
+Language: Python 3
+
+---
+
+## License
+
+MIT License
