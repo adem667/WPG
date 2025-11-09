@@ -197,7 +197,7 @@ python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
 
 # Run the generator (use python3 explicitly)
-python3 wolf_pass_generator.py
+python3 generator.py
 ```
 
 ### Install on **Termux** (Android)
@@ -218,7 +218,7 @@ pip install -r requirements.txt
 
 # Run the generator
 # If the script name is wolf_pass_generator.py:
-python wolf_pass_generator.py
+python3 generator.py
 
 # Or if you've renamed it to generator.py:
 # python generator.py
