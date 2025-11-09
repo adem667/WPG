@@ -57,22 +57,22 @@ python wolf_pass_generator.py
 
 ####  Random Password Generation
 ```bash
-python wolf_pass_generator.py -g -f all -l 12 -c 100
+python3 generator.py -g -f all -l 12 -c 100
 ```
 
 ####  Victim-Based Generation
 ```bash
-python wolf_pass_generator.py -v -a massive,hybrid -c 50000 -n victim_list.txt
+python3 generator.py -v -a massive,hybrid -c 50000 -n victim_list.txt
 ```
 
 ####  Load RockYou List
 ```bash
-python wolf_pass_generator.py -r -c 100000 -n rockyou_filtered.txt
+python generator.py -r -c 100000 -n rockyou_filtered.txt
 ```
 
 ####  Interactive Mode
 ```bash
-python wolf_pass_generator.py
+python3 generator.py
 ```
 
 ---
