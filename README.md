@@ -39,7 +39,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/adem667/WPG.git
-cd WPG-main
+cd WPG
 ```
 
 Run the tool:
@@ -56,7 +56,7 @@ python3 generator.py
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y git python3 python3-pip
 git clone https://github.com/adem667/WPG.git
-cd WPG-main
+cd WPG
 python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
 python3 generator.py
@@ -68,10 +68,9 @@ python3 generator.py
 
 ```bash
 pkg update && pkg upgrade -y
-pkg install -y git python
+pkg install  python3
 git clone https://github.com/adem667/WPG.git
-cd WPG-main
-pip install --upgrade pip
+cd WPG
 pip install -r requirements.txt
 python3 generator.py
 ```
