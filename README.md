@@ -190,7 +190,7 @@ sudo apt install -y git python3 python3-pip
 
 # Clone the repository and navigate into it
 git clone https://github.com/adem667/WPG.git
-cd WPG-main
+cd WPG
 
 # Install Python dependencies (if present)
 python3 -m pip install --upgrade pip
@@ -206,18 +206,18 @@ python3 generator.py
 pkg update && pkg upgrade -y
 
 # Install git and python (provides Python 3)
-pkg install -y git python
+pkg install python3
 
 # Clone the repository and navigate into it
 git clone https://github.com/adem667/WPG.git
-cd WPG-main
+cd WPG
 
 # Install Python dependencies (if present)
 pip install --upgrade pip
 pip install -r requirements.txt
 
 # Run the generator
-# If the script name is wolf_pass_generator.py:
+# If the script name is generator.py:
 python3 generator.py
 
 # Or if you've renamed it to generator.py:
